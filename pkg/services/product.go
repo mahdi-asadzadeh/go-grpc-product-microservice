@@ -77,7 +77,8 @@ func (s *Server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest
 	product.Body = req.GetBody()
 	product.Price = float64(req.GetPrice())
 
-	if err := s.H.DB.Create(&product); err != nil {
+	err := s.H.DB.Create(&product).Error
+	if err != nil {
 		return nil, status.Error(codes.Internal, "Invalid product data.")
 	}
 	return &pb.CreateProductResponse{Product: &pb.Product{
