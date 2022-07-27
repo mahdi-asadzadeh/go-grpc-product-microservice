@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Starting server ...")
+	fmt.Println("Starting product server ...")
 	// Load config
 	config.LoadSettings(true)
 
@@ -21,7 +21,7 @@ func main() {
 	DB_URL := os.Getenv("DB_URL")
 	h := db.Init(DB_URL)
 
-	lis, err := net.Listen("tcp", "0.0.0.0:50051")
+	lis, err := net.Listen("tcp", os.Getenv("SERVER_IP"))
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
